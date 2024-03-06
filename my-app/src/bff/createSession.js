@@ -20,7 +20,6 @@ export const createSession = (roleId) => {
 			break;
 		}
 		case ROLE.READER: {
-			session.removeChild = removeComment;
 			break;
 		}
 		case ROLE.GUEST: {

@@ -39,7 +39,7 @@ export const server = {
 
 		return {
 			error: null,
-			res: createSession(3),
+			res: createSession(2),
 		};
 	},
 };
