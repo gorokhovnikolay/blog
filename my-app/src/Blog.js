@@ -5,6 +5,7 @@ const Content = styled.div`
 	text-align: center;
 `;
 const Header = () => <div>Шапка</div>;
+
 const Footer = () => <div>Подвал</div>;
 
 export const Blog = () => {
