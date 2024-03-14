@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const IconContainer = ({ className, id }) => {
 	return (
 		<div className={className}>
-			<i class={`fa ${id}`} aria-hidden="true"></i>
+			<i className={`fa ${id}`} aria-hidden="true"></i>
 		</div>
 	);
 };

@@ -24,9 +24,11 @@ export const Footer = () => {
 			.then((data) => data.json())
 			.then(({ main, name, weather }) => {
 				setCity(name);
-				setTemperature(Math.round(main.temp));
+				setTemperature(Math.round(main.temp) + '℃');
 				setWeather(weather[0].description);
-				setCurentFullYear(new Date().getFullYear());
+				setCurentFullYear(
+					new Date().toLocaleString('ru', { day: 'numeric', month: 'long' }),
+				);
 			});
 	}, []);
 	return (
@@ -37,10 +39,10 @@ export const Footer = () => {
 			</div>
 			<div>
 				<div>
-					{city} {curentFullYear}г.{' '}
+					{city} {curentFullYear}{' '}
 				</div>
 				<div>
-					{temperature}℃ {weather}
+					{temperature} {weather}
 				</div>
 			</div>
 		</FooterContainer>

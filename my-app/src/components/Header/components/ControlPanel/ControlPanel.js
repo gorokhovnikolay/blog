@@ -1,7 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Icon } from '../../../Icon/Icon';
+import { logOutUser } from '../../../../store/actions';
 
 const UserBlock = styled.div`
 	margin-bottom: 12px;
@@ -16,14 +19,28 @@ const ButtonBack = styled.div`
 `;
 
 const ControlPanelContainer = ({ className }) => {
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.user);
 	const navigate = useNavigate();
 	return (
 		<div className={className}>
-			<Link to="/login">
+			{user.login ? (
 				<UserBlock>
-					Вход <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
+					<div onClick={() => dispatch(logOutUser(user))}>
+						Выход {user.login}
+					</div>
 				</UserBlock>
-			</Link>
+			) : (
+				<Link to="/login">
+					<UserBlock>
+						<div>
+							Вход{' '}
+							<i className="fa fa-sign-out fa-lg" aria-hidden="true"></i>
+						</div>
+					</UserBlock>
+				</Link>
+			)}
+
 			<IconBlock>
 				<ButtonBack onClick={() => navigate(-1)}>
 					<Icon id={'fa-backward'} margin="0 0 0 10px" />

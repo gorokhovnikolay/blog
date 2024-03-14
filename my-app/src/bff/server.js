@@ -1,5 +1,4 @@
 import { addUser } from './addUser';
-import { createSession } from './createSession';
 import { getUser } from './getUser';
 
 export const server = {
@@ -21,25 +20,34 @@ export const server = {
 
 		return {
 			error: null,
-			res: createSession(user.role_id),
+			res: {
+				id: user.id,
+				login: user.login,
+				roleId: user.role_id,
+				session: Date.now() + Math.random().toFixed(50),
+			},
 		};
 	},
 
 	registration: async (regLogin, regPassword) => {
-		const user = await getUser(regLogin);
+		const candidatUser = await getUser(regLogin);
 
-		if (user) {
+		if (candidatUser) {
 			return {
 				error: 'Такй логин занят',
 				res: null,
 			};
 		}
 
-		addUser(regLogin, regPassword);
-
+		const user = await addUser(regLogin, regPassword);
 		return {
 			error: null,
-			res: createSession(2),
+			res: {
+				id: user.id,
+				login: user.login,
+				roleId: user.role_id,
+				session: Date.now() + Math.random().toFixed(50),
+			},
 		};
 	},
 };

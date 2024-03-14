@@ -12,4 +12,4 @@ export const addUser = (login, password) =>
 			role_id: 2,
 			registred_at: getRandomDate(),
 		}),
-	});
+	}).then((data) => data.json());
