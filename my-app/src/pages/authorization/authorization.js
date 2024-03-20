@@ -2,12 +2,13 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { server } from '../../bff';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { Input } from '../../components';
 import { setUser } from '../../store/actions';
-import { useNavigate, Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useResetFormHook } from '../../hooks/resetFormHook';
+import { useServerRequest } from '../../hooks/useServerRequest';
 
 const authShemaYup = yup.object().shape({
 	login: yup
@@ -49,6 +50,7 @@ export const Autorization = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -58,25 +60,25 @@ export const Autorization = () => {
 		resolver: yupResolver(authShemaYup),
 	});
 
+	const request = useServerRequest();
 	const [serverError, setServerError] = useState(null);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const roleId = useSelector(({ user }) => user.roleId);
 
 	const onSubmit = ({ login, password }) => {
-		server.autorization(login, password).then(({ error, res }) => {
+		// server.autorization(login, password)
+		request('autorization', login, password).then(({ error, res }) => {
 			if (error) {
 				setServerError(`Ошибка запроса:${error}`);
 				return;
 			}
 			dispatch(setUser(res));
-			navigate('/');
 		});
 	};
 
+	useResetFormHook(reset);
 	const errorForm = errors?.login?.message || errors?.password?.message;
 	const erorContainer = errorForm || serverError;
-
 	if (roleId !== 3) {
 		return <Navigate to="/" />;
 	}

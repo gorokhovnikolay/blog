@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Input } from '../../components';
 import { setUser } from '../../store/actions';
 import { Link, Navigate } from 'react-router-dom';
+import { useResetFormHook } from '../../hooks/resetFormHook';
 
 const regShemaYup = yup.object().shape({
 	login: yup
@@ -52,6 +53,7 @@ export const Register = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -75,7 +77,7 @@ export const Register = () => {
 			dispatch(setUser(res));
 		});
 	};
-
+	useResetFormHook(reset);
 	const errorForm = errors?.login?.message || errors?.password?.message;
 	const erorContainer = errorForm || serverError;
 

@@ -1,0 +1,99 @@
+import styled from 'styled-components';
+import { Icon } from '../Icon/Icon';
+import { useState } from 'react';
+import { useServerRequest } from '../../hooks/useServerRequest';
+// import { useDispatch } from 'react-redux';
+
+const UserContainer = ({
+	roles,
+	className,
+	id,
+	login,
+	registredAt,
+	roleId,
+	deleteUser,
+}) => {
+	const [initialRole, setInitialrole] = useState(roleId);
+	const [newRoleId, setNewRoleId] = useState(roleId);
+	const request = useServerRequest();
+	// const dispatch = useDispatch();
+
+	const setNewRole = () => {
+		request('fetchSetNewRole', id, newRoleId).then(({ error, res }) => {
+			if (error) {
+				return;
+			}
+			setInitialrole(newRoleId);
+		});
+	};
+
+	// const deleteUser = () => {
+	// 	request('fetchDeleteUser', id).then(({ error, res }) => console.log(error, res));
+	// };
+
+	const isDesebledRoleId = newRoleId === initialRole;
+
+	return (
+		<div className={className}>
+			<div className="table-row__user">
+				<div className="table-row__login">{login}</div>
+				<div className="table-row__registred">{registredAt}</div>
+				<div className="table-row__role">
+					<select
+						value={newRoleId}
+						onChange={({ target }) => setNewRoleId(Number(target.value))}
+					>
+						{roles.map(({ id, name }) => (
+							<option key={id} value={id}>
+								{name}
+							</option>
+						))}
+					</select>
+					<div onClick={setNewRole}>
+						<Icon
+							id={'fa-floppy-o'}
+							margin="0 0 0 10px"
+							disabled={isDesebledRoleId}
+							size="16px"
+						/>
+					</div>
+				</div>
+			</div>
+			<div onClick={() => deleteUser(id)}>
+				<Icon
+					className="table-row__delete"
+					id={'fa-trash-o'}
+					margin="0 0 0 10px"
+					size="16px"
+				/>
+			</div>
+		</div>
+	);
+};
+
+export const User = styled(UserContainer)`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	& .table-row__user {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		border: 1px solid gray;
+		border-radius: 8px;
+		margin: 2px 0 2px 0;
+	}
+	& .table-row__login,
+	.table-row__registred,
+	.table-row__role {
+		width: 33%;
+		text-align: start;
+		padding-left: 5px;
+	}
+	& .table-row__role {
+		display: flex;
+	}
+`;

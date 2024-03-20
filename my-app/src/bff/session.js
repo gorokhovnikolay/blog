@@ -6,4 +6,7 @@ export const session = {
 	removeHash({ session }) {
 		delete this.list[session];
 	},
+	checkAccess(user, accessRoles) {
+		return this.list[user.session] && accessRoles.includes(user.roleId);
+	},
 };
