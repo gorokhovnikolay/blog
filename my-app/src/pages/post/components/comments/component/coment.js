@@ -10,7 +10,17 @@ const CommentContainer = ({ className, comment }) => {
 	const dispatch = useDispatch();
 
 	const deleteComment = (id) => {
-		dispatch(deleteCommentAsynk(serverRequest, id));
+		dispatch({
+			type: 'OPEN_MODAL',
+			payload: {
+				text: 'Удалить комментарий???',
+				onComfirm: () => {
+					dispatch(deleteCommentAsynk(serverRequest, id));
+					dispatch({ type: 'CLOSED_MODAL' });
+				},
+				onCancel: () => dispatch({ type: 'CLOSED_MODAL' }),
+			},
+		});
 	};
 
 	return (

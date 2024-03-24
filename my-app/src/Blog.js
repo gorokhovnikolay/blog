@@ -5,6 +5,7 @@ import { styled } from 'styled-components';
 import { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from './store/actions';
+import { Modal } from './components/Modal/Modal';
 
 const Content = styled.div`
 	text-align: center;
@@ -52,6 +53,7 @@ export const Blog = () => {
 				</Routes>
 			</Content>
 			<Footer />
+			<Modal />
 		</App>
 	);
 };
