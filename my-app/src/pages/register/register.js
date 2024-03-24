@@ -9,6 +9,7 @@ import { Input } from '../../components';
 import { setUser } from '../../store/actions';
 import { Link, Navigate } from 'react-router-dom';
 import { useResetFormHook } from '../../hooks/resetFormHook';
+import { ROLE } from '../../constants/role';
 
 const regShemaYup = yup.object().shape({
 	login: yup
@@ -25,7 +26,7 @@ const regShemaYup = yup.object().shape({
 		.max(40, 'Пароль не должен быть более 40 символов'),
 	confirmPassword: yup
 		.string()
-		.oneOf([yup.ref('password'), null], 'Пароли не совпаддают'),
+		.oneOf([yup.ref('password'), null], 'Пароли не совпадают'),
 });
 const FormContainer = styled.div`
 	form {
@@ -78,10 +79,13 @@ export const Register = () => {
 		});
 	};
 	useResetFormHook(reset);
-	const errorForm = errors?.login?.message || errors?.password?.message;
+	const errorForm =
+		errors?.login?.message ||
+		errors?.password?.message ||
+		errors?.confirmPassword?.message;
 	const erorContainer = errorForm || serverError;
 
-	if (roleId !== 3) {
+	if (roleId !== ROLE.GUEST) {
 		return <Navigate to="/" />;
 	}
 
@@ -119,9 +123,7 @@ export const Register = () => {
 					</div>
 					{erorContainer && (
 						<div className="errors">
-							<div>{errors?.login?.message}</div>
-							<div>{errors?.password?.message}</div>
-							<div>{serverError}</div>
+							<div>{erorContainer}</div>
 						</div>
 					)}
 				</form>

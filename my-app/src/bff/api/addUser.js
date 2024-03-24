@@ -1,4 +1,4 @@
-import { getRandomDate } from '../utils/getRandomDate';
+import { getRandomDate } from '../utils';
 
 export const addUser = (login, password) =>
 	fetch('http://localhost:3003/users', {

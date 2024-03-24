@@ -4,3 +4,7 @@ export * from './getUsers';
 export * from './getRoles';
 export * from './deleteUser';
 export * from './setNewRole';
+export * from './getPost';
+export * from './getComments';
+export * from './addComment';
+export * from './deleteComment';

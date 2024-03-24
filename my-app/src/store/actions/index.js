@@ -3,4 +3,6 @@ export * from './getUsers';
 export * from './logOutUser';
 export * from './setRole';
 export * from './delUser';
-export * from './getUsers';
+export * from './fetchPostAsync';
+export * from './fetchCreateNewCommentAsync';
+export * from './deleteCommentAsynk';

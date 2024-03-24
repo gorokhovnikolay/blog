@@ -9,6 +9,7 @@ import { setUser } from '../../store/actions';
 import { Link, Navigate } from 'react-router-dom';
 import { useResetFormHook } from '../../hooks/resetFormHook';
 import { useServerRequest } from '../../hooks/useServerRequest';
+import { ROLE } from '../../constants/role';
 
 const authShemaYup = yup.object().shape({
 	login: yup
@@ -79,7 +80,7 @@ export const Autorization = () => {
 	useResetFormHook(reset);
 	const errorForm = errors?.login?.message || errors?.password?.message;
 	const erorContainer = errorForm || serverError;
-	if (roleId !== 3) {
+	if (roleId !== ROLE.GUEST) {
 		return <Navigate to="/" />;
 	}
 

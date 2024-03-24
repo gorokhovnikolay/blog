@@ -5,3 +5,7 @@ export * from './fetchRoles';
 export * from './fetchUsers';
 export * from './fetchDeleteUser';
 export * from './fetchSetNewRole';
+export * from './fetchPost';
+export * from './fetchComments';
+export * from './fetchCreateNewCommentAsync';
+export * from './fetchDeleteComment';
