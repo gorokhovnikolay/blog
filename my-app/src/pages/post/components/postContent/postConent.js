@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Icon } from '../../../../components';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-const PostContentContainer = ({ className }) => {
+const PostContentContainer = ({ className, postId, deletePost }) => {
 	const { image_url, title, publishing_at, content } = useSelector(({ post }) => post);
+	const navigation = useNavigate();
 
 	return (
 		<div className={className}>
@@ -12,8 +14,12 @@ const PostContentContainer = ({ className }) => {
 			<div className="post-block">
 				{publishing_at}
 				<div className="post-block__button">
-					<Icon id={'fa-pencil-square-o'} margin={'0 0 0 15px;'} />
-					<Icon id={'fa-trash'} margin={'0 0 0 15px;'} />
+					<Icon
+						id={'fa-pencil-square-o'}
+						margin={'0 0 0 15px;'}
+						onClick={() => navigation(`/post/${postId}/edit`)}
+					/>
+					<Icon id={'fa-trash'} margin={'0 0 0 15px;'} onClick={deletePost} />
 				</div>
 			</div>
 			<div className="post-content">{content}</div>
@@ -32,6 +38,7 @@ export const PostContent = styled(PostContentContainer)`
 	}
 	& .post-content {
 		text-align: justify;
+		white-space: break-spaces;
 	}
 	& .post-block {
 		display: flex;

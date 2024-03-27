@@ -1,0 +1,26 @@
+import { addPost, updatePost } from '../api';
+import { ROLE } from '../constants/role';
+import { session } from '../session';
+
+export const fetchSavePost = async (user, newPost) => {
+	try {
+		const accessRoles = [ROLE.ADMIN];
+
+		if (!session.checkAccess(user, accessRoles)) {
+			return {
+				error: 'Доступ запрещен',
+				res: null,
+			};
+		}
+
+		const post =
+			newPost.id !== '' ? await updatePost(newPost) : await addPost(newPost);
+
+		return {
+			error: null,
+			res: post,
+		};
+	} catch (error) {
+		console.log(error);
+	}
+};

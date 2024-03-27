@@ -9,3 +9,5 @@ export * from './fetchPost';
 export * from './fetchComments';
 export * from './fetchCreateNewCommentAsync';
 export * from './fetchDeleteComment';
+export * from './fetchSavePost';
+export * from './fetchDeletePost';

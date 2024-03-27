@@ -5,15 +5,7 @@ const initialState = {
 	content: '',
 	publishingAt: '',
 	commentsCount: '',
-	comments: [
-		{
-			id: '',
-			autor_id: '',
-			content: '',
-			publishing_comment_at: '',
-			post_id: '',
-		},
-	],
+	comments: [],
 };
 
 export const postReducer = (state = initialState, { type, payload }) => {
@@ -30,6 +22,8 @@ export const postReducer = (state = initialState, { type, payload }) => {
 				...state,
 				comments: state.comments.filter(({ id }) => id !== payload),
 			};
+		case 'RESET_POST_DATA':
+			return initialState;
 		default:
 			return state;
 	}

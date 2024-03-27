@@ -6,3 +6,5 @@ export * from './delUser';
 export * from './fetchPostAsync';
 export * from './fetchCreateNewCommentAsync';
 export * from './deleteCommentAsynk';
+export * from './savePostAsync';
+export * from './deletePostAsynk';
