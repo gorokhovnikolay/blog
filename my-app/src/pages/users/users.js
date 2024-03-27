@@ -26,9 +26,7 @@ const UsersContainer = ({ className }) => {
 	}, [requestServer, isReset]);
 
 	const deleteUser = (userId) => {
-		requestServer('fetchDeleteUser', userId).then(({ error, res }) =>
-			console.log(error, res),
-		);
+		requestServer('fetchDeleteUser', userId);
 		setIsReset((prev) => !prev);
 	};
 

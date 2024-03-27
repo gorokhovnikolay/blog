@@ -5,8 +5,8 @@ export const addPost = async (newPost) => {
 		method: 'POST',
 		headers: { 'content-type': 'application/json' },
 		body: JSON.stringify({
-			image_url: newPost.newImageRef,
-			title: newPost.newTitleRef,
+			image_url: newPost.newImageValue,
+			title: newPost.newTitleValue,
 			content: newPost.newContentRef,
 			publishing_at: getRandomDate(),
 		}),

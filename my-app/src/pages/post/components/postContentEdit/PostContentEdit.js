@@ -1,53 +1,56 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Icon, Input } from '../../../../components';
 import styled from 'styled-components';
-import { useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sanitizeContent } from '../../utils/sanitizeContent';
 import { useServerRequest } from '../../../../hooks/useServerRequest';
 import { savePostAsync } from '../../../../store/actions';
 
 const PostContentEditContainer = ({ className, deletePost }) => {
-	const { id, image_url, title, publishing_at, content } = useSelector(
+	const { id, imageUrl, title, publishing_at, content } = useSelector(
 		({ post }) => post,
 	);
-	console.log(image_url, title, content);
+
 	const navigation = useNavigate();
 
-	const imageRef = useRef();
-	const titleRef = useRef();
+	const [newTitleValue, setNewTitleValue] = useState(title);
+	const [newImageValue, setNewImageValue] = useState(imageUrl);
 	const contentRef = useRef();
 
 	const dispatch = useDispatch();
 	const serverRequest = useServerRequest();
 
+	useLayoutEffect(() => {
+		setNewTitleValue(title);
+		setNewImageValue(imageUrl);
+	}, [title, imageUrl]);
+
 	const onSave = () => {
-		const newImageRef = imageRef.current.value;
-		const newTitleRef = titleRef.current.value;
 		const newContentRef = sanitizeContent(contentRef.current.innerHTML);
 
 		dispatch(
-			savePostAsync(
-				serverRequest,
-				{
-					id,
-					newImageRef,
-					newTitleRef,
-					newContentRef,
-				},
-				navigation,
-			),
+			savePostAsync(serverRequest, {
+				id,
+				newImageValue,
+				newTitleValue,
+				newContentRef,
+			}),
 		).then(({ id }) => navigation(`/post/${id}`));
 	};
 
 	return (
 		<div className={className}>
 			<Input
-				ref={imageRef}
-				defaultValue={image_url}
+				value={newImageValue}
 				placeholder="URL изображения"
+				onChange={({ target }) => setNewImageValue(target.value)}
 			/>
-			<Input ref={titleRef} defaultValue={title} placeholder="Заголовок..." />
+			<Input
+				value={newTitleValue}
+				placeholder="Заголовок..."
+				onChange={({ target }) => setNewTitleValue(target.value)}
+			/>
 			<div className="post-block">
 				<div>{publishing_at}</div>
 				<div className="post-block__button">

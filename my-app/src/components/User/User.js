@@ -27,10 +27,6 @@ const UserContainer = ({
 		});
 	};
 
-	// const deleteUser = () => {
-	// 	request('fetchDeleteUser', id).then(({ error, res }) => console.log(error, res));
-	// };
-
 	const isDesebledRoleId = newRoleId === initialRole;
 
 	return (
