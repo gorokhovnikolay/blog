@@ -4,9 +4,17 @@ export const fetchPostAsync = (serverRequest, postId) => (dispatch) => {
 		serverRequest('fetchComments', postId),
 	]).then(([postRes, commentsRes]) => {
 		if (postRes && commentsRes) {
+			const { id, content, image_url, publishing_at, title } = postRes.res;
 			dispatch({
 				type: 'GET_POST',
-				payload: { ...postRes.res, comments: commentsRes.res },
+				payload: {
+					id,
+					content,
+					imageUrl: image_url,
+					publishingAt: publishing_at,
+					title,
+					comments: commentsRes.res,
+				},
 			});
 		}
 	});

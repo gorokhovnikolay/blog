@@ -1,6 +1,6 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Header, Footer } from './components';
-import { Autorization, Register, Users, Post } from './pages';
+import { Autorization, Register, Users, Post, Main } from './pages';
 import { styled } from 'styled-components';
 import { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -38,14 +38,7 @@ export const Blog = () => {
 				<Routes>
 					<Route path="/login" element={<Autorization />} />
 					<Route path="/register" element={<Register />} />
-					<Route
-						path="/"
-						element={
-							<div>
-								<Link to="/post/4">Перейти</Link>
-							</div>
-						}
-					/>
+					<Route path="/" element={<Main />} />
 					<Route path="/users" element={<Users />} />
 					<Route path="/post" element={<Post />} />
 					<Route path="/post/:postId" element={<Post />} />

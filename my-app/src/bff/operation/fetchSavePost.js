@@ -18,7 +18,13 @@ export const fetchSavePost = async (user, newPost) => {
 
 		return {
 			error: null,
-			res: post,
+			res: {
+				id: post.id,
+				title: post.title,
+				content: post.content,
+				imageUrl: post.image_url,
+				publishedAt: post.published_at,
+			},
 		};
 	} catch (error) {
 		console.log(error);

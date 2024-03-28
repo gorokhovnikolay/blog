@@ -8,9 +8,9 @@ import { useServerRequest } from '../../../../hooks/useServerRequest';
 import { savePostAsync } from '../../../../store/actions';
 
 const PostContentEditContainer = ({ className, deletePost }) => {
-	const { id, imageUrl, title, publishing_at, content } = useSelector(
-		({ post }) => post,
-	);
+	const { id, imageUrl, title, publishingAt, content } = useSelector(({ post }) => {
+		return post;
+	});
 
 	const navigation = useNavigate();
 
@@ -52,11 +52,11 @@ const PostContentEditContainer = ({ className, deletePost }) => {
 				onChange={({ target }) => setNewTitleValue(target.value)}
 			/>
 			<div className="post-block">
-				<div>{publishing_at}</div>
+				<div>{publishingAt}</div>
 				<div className="post-block__button">
 					<Icon id={'fa-floppy-o'} margin={'0 0 0 15px;'} onClick={onSave} />
 
-					{publishing_at && (
+					{publishingAt && (
 						<Icon
 							id={'fa-trash'}
 							margin={'0 0 0 15px;'}

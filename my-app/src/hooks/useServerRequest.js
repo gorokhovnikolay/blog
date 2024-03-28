@@ -12,6 +12,7 @@ export const useServerRequest = () => {
 				'registration',
 				'fetchPost',
 				'fetchComments',
+				'fetchPosts',
 			].includes(operation)
 				? params
 				: [user, ...params];

@@ -4,15 +4,17 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const PostContentContainer = ({ className, postId, deletePost }) => {
-	const { image_url, title, publishing_at, content } = useSelector(({ post }) => post);
+	const { imageUrl, title, publishingAt, content } = useSelector(({ post }) => {
+		return post;
+	});
 	const navigation = useNavigate();
 
 	return (
 		<div className={className}>
-			<img src={image_url} alt={title} />
+			<img src={imageUrl} alt={title} />
 			<div className="post-title"> {title}</div>
 			<div className="post-block">
-				{publishing_at}
+				{publishingAt}
 				<div className="post-block__button">
 					<Icon
 						id={'fa-pencil-square-o'}
