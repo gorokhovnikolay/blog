@@ -37,7 +37,7 @@ const PostCardContainer = ({
 };
 
 export const PostCard = styled(PostCardContainer)`
-	width: 260px;
+	width: 265px;
 	margin: 20px;
 	display: block;
 	border: 1px solid black;

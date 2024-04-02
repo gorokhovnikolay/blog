@@ -28,7 +28,6 @@ const PostContentEditContainer = ({ className, deletePost }) => {
 
 	const onSave = () => {
 		const newContentRef = sanitizeContent(contentRef.current.innerHTML);
-
 		dispatch(
 			savePostAsync(serverRequest, {
 				id,

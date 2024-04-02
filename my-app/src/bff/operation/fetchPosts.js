@@ -1,15 +1,15 @@
 import { getComments, getPosts } from '../api';
 
-export const fetchPosts = async (page, limit) => {
+export const fetchPosts = async (page, goSearchPhrase, limit) => {
 	try {
-		const [posts, headers] = await getPosts(page, limit);
+		const { count, posts } = await getPosts(page, goSearchPhrase, limit);
+
 		const comments = await getComments();
 
-		const lastPage = headers.match(/_page=(\d{1,4})&_limit=\d{1,3}>; rel="last"$/);
 		return {
 			error: null,
 			res: {
-				lastPage: Number(lastPage[1]),
+				lastPage: Math.ceil(count.length / limit),
 				posts: posts.map((post) => {
 					const commentsCount = comments.filter((comment) => {
 						return post.id === comment.post_id;

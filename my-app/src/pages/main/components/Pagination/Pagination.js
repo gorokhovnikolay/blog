@@ -22,8 +22,10 @@ const PaginationContainer = ({ className, page, lastPage, setPage }) => {
 
 export const Pagination = styled(PaginationContainer)`
 	display: flex;
-	.curent-page,
+	padding: 0 20px;
+	& .curent-page,
 	button {
 		width: 100%;
+		margin: 0 5px;
 	}
 `;

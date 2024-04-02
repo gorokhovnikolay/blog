@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Header, Footer } from './components';
+import { Header, Footer, CheckContent } from './components';
 import { Autorization, Register, Users, Post, Main } from './pages';
 import { styled } from 'styled-components';
 import { useLayoutEffect } from 'react';
@@ -43,7 +43,7 @@ export const Blog = () => {
 					<Route path="/post" element={<Post />} />
 					<Route path="/post/:postId" element={<Post />} />
 					<Route path="/post/:postId/edit" element={<Post />} />
-					<Route path="*" element={<div>Ошибка</div>} />
+					<Route path="*" element={<CheckContent />} />
 				</Routes>
 			</Content>
 			<Footer />
