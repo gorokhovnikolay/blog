@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const Content = ({ children, error }) => {
 	return error ? (
 		<>
@@ -7,4 +9,9 @@ export const Content = ({ children, error }) => {
 	) : (
 		children
 	);
+};
+
+Content.propTypes = {
+	error: PropTypes.string,
+	children: PropTypes.node,
 };

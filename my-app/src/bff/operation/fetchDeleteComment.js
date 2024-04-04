@@ -4,7 +4,7 @@ import { session } from '../session';
 
 export const fetchDeleteComment = async (user, commentId) => {
 	try {
-		const accessRoles = [ROLE.ADMIN];
+		const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR];
 
 		if (!session.checkAccess(user, accessRoles)) {
 			return {

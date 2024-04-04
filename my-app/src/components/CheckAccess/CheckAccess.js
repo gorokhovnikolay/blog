@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const CheckAccessContainer = ({ access, children }) => {
@@ -12,3 +13,8 @@ const CheckAccessContainer = ({ access, children }) => {
 };
 
 export const CheckAccess = styled(CheckAccessContainer)``;
+
+CheckAccessContainer.propTypes = {
+	access: PropTypes.bool,
+	children: PropTypes.node,
+};

@@ -1,13 +1,18 @@
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Icon } from '../../../../components';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { checkAccess } from '../../../../utils';
+import { ROLE } from '../../../../constants';
 
 const PostContentContainer = ({ className, postId, deletePost }) => {
 	const { imageUrl, title, publishingAt, content } = useSelector(({ post }) => {
 		return post;
 	});
 	const navigation = useNavigate();
+	const roleId = useSelector(({ user }) => user.roleId);
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId);
 
 	return (
 		<div className={className}>
@@ -16,12 +21,20 @@ const PostContentContainer = ({ className, postId, deletePost }) => {
 			<div className="post-block">
 				{publishingAt}
 				<div className="post-block__button">
-					<Icon
-						id={'fa-pencil-square-o'}
-						margin={'0 0 0 15px;'}
-						onClick={() => navigation(`/post/${postId}/edit`)}
-					/>
-					<Icon id={'fa-trash'} margin={'0 0 0 15px;'} onClick={deletePost} />
+					{isAdmin && (
+						<>
+							<Icon
+								id={'fa-pencil-square-o'}
+								margin={'0 0 0 15px;'}
+								onClick={() => navigation(`/post/${postId}/edit`)}
+							/>
+							<Icon
+								id={'fa-trash'}
+								margin={'0 0 0 15px;'}
+								onClick={deletePost}
+							/>
+						</>
+					)}
 				</div>
 			</div>
 			<div className="post-content">{content}</div>
@@ -52,3 +65,8 @@ export const PostContent = styled(PostContentContainer)`
 		display: flex;
 	}
 `;
+
+PostContent.propTypes = {
+	postId: PropTypes.string.isRequired,
+	deletePost: PropTypes.func.isRequired,
+};

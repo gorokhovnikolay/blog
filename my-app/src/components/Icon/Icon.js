@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const IconContainer = ({ className, id, ...params }) => {
@@ -13,3 +14,7 @@ export const Icon = styled(IconContainer)`
 	margin: ${({ margin = '0' }) => margin};
 	color: ${({ disabled }) => (disabled ? '#ccc' : '#000')};
 `;
+
+IconContainer.propTypes = {
+	id: PropTypes.string,
+};

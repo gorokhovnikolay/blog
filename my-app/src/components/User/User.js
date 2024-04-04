@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from '../Icon/Icon';
 import { useState } from 'react';
 import { useServerRequest } from '../../hooks/useServerRequest';
+import { PROP_TYPE } from '../../constants/propTypes';
 // import { useDispatch } from 'react-redux';
 
 const UserContainer = ({
@@ -93,3 +95,12 @@ export const User = styled(UserContainer)`
 		display: flex;
 	}
 `;
+
+User.propTypes = {
+	roles: PropTypes.array,
+	id: PropTypes.string.isRequired,
+	login: PropTypes.string.isRequired,
+	registredAt: PropTypes.string.isRequired,
+	roleId: PropTypes.number.isRequired,
+	deleteUser: PropTypes.func.isRequired,
+};

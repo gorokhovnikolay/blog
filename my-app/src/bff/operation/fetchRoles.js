@@ -5,7 +5,6 @@ import { session } from '../session';
 export const fetchRoles = async (user) => {
 	try {
 		const accessRoles = [ROLE.ADMIN];
-
 		if (!session.checkAccess(user, accessRoles)) {
 			return {
 				error: 'Доступ запрещен',

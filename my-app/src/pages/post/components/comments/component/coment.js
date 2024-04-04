@@ -1,13 +1,20 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from '../../../../../components';
 import { useServerRequest } from '../../../../../hooks/useServerRequest';
 import { deleteCommentAsynk } from '../../../../../store/actions';
 import { useDispatch } from 'react-redux';
+import { ROLE } from '../../../../../constants';
+import { useSelector } from 'react-redux';
+import { checkAccess } from '../../../../../utils';
 
 const CommentContainer = ({ className, comment }) => {
 	const { id, content, autor_id, publishing_comment_at } = comment;
 	const serverRequest = useServerRequest();
 	const dispatch = useDispatch();
+
+	const roleId = useSelector(({ user }) => user.roleId);
+	const isDeleteComment = checkAccess([ROLE.ADMIN, ROLE.MODERATOR], roleId);
 
 	const deleteComment = (id) => {
 		dispatch({
@@ -42,9 +49,11 @@ const CommentContainer = ({ className, comment }) => {
 				</div>
 				<div className="comment-content">{content}</div>
 			</div>
-			<div onClick={() => deleteComment(id)}>
-				<Icon id={'fa-trash '} margin={'0 5px'} />
-			</div>
+			{isDeleteComment && (
+				<div onClick={() => deleteComment(id)}>
+					<Icon id={'fa-trash '} margin={'0 5px'} />
+				</div>
+			)}
 		</div>
 	);
 };
@@ -71,3 +80,12 @@ export const Comment = styled(CommentContainer)`
 		align-items: center;
 	}
 `;
+
+Comment.propTypes = {
+	comment: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		content: PropTypes.string.isRequired,
+		autor_id: PropTypes.string.isRequired,
+		publishing_comment_at: PropTypes.string.isRequired,
+	}),
+};

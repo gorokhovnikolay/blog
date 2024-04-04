@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Icon, Input } from '../../../../components';
 import styled from 'styled-components';
@@ -101,3 +102,7 @@ export const PostContentEdit = styled(PostContentEditContainer)`
 		display: flex;
 	}
 `;
+
+PostContentEdit.propTypes = {
+	deletePost: PropTypes.func.isRequired,
+};

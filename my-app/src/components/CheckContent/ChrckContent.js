@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const CheckContentContainer = ({ error = 'Страница не найдена', children }) => {
@@ -12,3 +13,8 @@ const CheckContentContainer = ({ error = 'Страница не найдена',
 };
 
 export const CheckContent = styled(CheckContentContainer)``;
+
+CheckContentContainer.propTypes = {
+	error: PropTypes.string,
+	children: PropTypes.node,
+};

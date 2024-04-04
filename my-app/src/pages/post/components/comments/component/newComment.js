@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Icon } from '../../../../../components';
 
@@ -21,4 +22,8 @@ export const NewComment = ({ createNewComment }) => {
 			</div>
 		</div>
 	);
+};
+
+NewComment.propTypes = {
+	createNewComment: PropTypes.func.isRequired,
 };

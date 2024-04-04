@@ -19,6 +19,7 @@ const UsersContainer = ({ className }) => {
 					setError(usersRes.error || rolesRes.error);
 					return;
 				}
+				setError(null);
 				setUsers(usersRes.res);
 				setRoles(rolesRes.res);
 			},

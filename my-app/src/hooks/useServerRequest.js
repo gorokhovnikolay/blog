@@ -4,7 +4,6 @@ import { useCallback } from 'react';
 
 export const useServerRequest = () => {
 	const user = useSelector(({ user }) => user);
-
 	return useCallback(
 		(operation, ...params) => {
 			const request = [

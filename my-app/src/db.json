@@ -13,6 +13,9 @@
       "password": "qwerty123",
       "role_id": 1,
       "registred_at": "2044-12-20 19:12"
+    },
+    {
+      "id": "-n_ULQS"
     }
   ],
   "posts": [
@@ -157,6 +160,13 @@
       "publishing_comment_at": "2036-10-04 18:45",
       "post_id": "3",
       "id": "SXthdV5"
+    },
+    {
+      "autor_id": "nikolay",
+      "content": "123",
+      "publishing_comment_at": "2040-05-14 04:22",
+      "post_id": "4",
+      "id": "JmNmdj4"
     }
   ],
   "roles": [

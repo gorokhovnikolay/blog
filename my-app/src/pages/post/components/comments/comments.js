@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Comment, NewComment } from './component';
@@ -34,3 +35,7 @@ export const Comments = styled(CommentsContainer)`
 		}
 	}
 `;
+
+Comments.propTypes = {
+	createNewComment: PropTypes.func.isRequired,
+};

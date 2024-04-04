@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useStore } from 'react-redux';
 
@@ -14,4 +15,8 @@ export const useResetFormHook = (reset) => {
 			}
 		});
 	}, [reset, store]);
+};
+
+useResetFormHook.propTypes = {
+	reset: PropTypes.func.isRequired,
 };
